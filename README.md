@@ -60,7 +60,7 @@ For a **quick demo setup**, build this flow. It uses the **"Provision Dynamic Ac
 For a more realistic deployment, we recommend to use this flow. It uses the **"Provision IDM Account"** node to **permanently persist user accounts** in an Identity Management (IDM). An IDM instance needs to be configured in Access Management.
 
 
-![Tree with permanent accounts](/images/priovision_idm.png)
+![Tree with permanent accounts](/images/provision_idm.png)
 
 
 ### Configure OAuth 2.0 node
