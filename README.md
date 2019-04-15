@@ -5,11 +5,11 @@ Document version: 1.0 (March 2019)
 
 ## Solution Overview
 
-You can now add flexible identity verification policies to your Forgerock workflow using ID DataWeb's Attribute Exchange Network (AXN.) This solution helps you answer "How do I verify that my user's are really who they claim to be" across B2C, B2B and B2E use cases. Forgerock offloads the process of identity verification to ID DataWeb, where customers can configure exactly what attributes need to be collected, what data sources should be used for verification, and how the results should be interpreted into Trust Scores and Policy Decisions across the industry's top identity verification providers. These verification techniques can be be tailored to meet regulatory requirements like KYC/AML, NIST 800-63-3, or EPCS (Electronic Prescriptions for Controlled Substances,) as well as enterprise use cases (Supply chain verification, enterprise password reset, privileged account provisioning.)
+You can now add flexible identity verification policies to your ForgeRock workflow using ID DataWeb's Attribute Exchange Network (AXN.) This solution helps you answer "How do I verify that my user's are really who they claim to be" across B2C, B2B and B2E use cases. ForgeRock offloads the process of identity verification to ID DataWeb, where customers can configure exactly what attributes need to be collected, what data sources should be used for verification, and how the results should be interpreted into Trust Scores and Policy Decisions across the industry's top identity verification providers. These verification techniques can be be tailored to meet regulatory requirements like KYC/AML, NIST 800-63-3, or EPCS (Electronic Prescriptions for Controlled Substances,) as well as enterprise use cases (Supply chain verification, enterprise password reset, privileged account provisioning.)
 
 ## ID DataWeb Overview
 
-ID DataWeb’s Attribute Exchange Network can serve as the central identity verification, decisioning and workflow hub for an organization's account opening, password reset, or ongoing re-verification requirements. The AXN is a multi-tenant SaaS platform that currently integrates with 70+ of the industry’s top verification services, across human identity, affiliations, and environmental risk – presenting a single management console, cross-vendor Trust Score, and Policy Engine. In addition - the AXN integrates out of the box with ForgeRock thorugh industry standard OpenID Connect - allowing Forgerock customers to easily add tailored identity verification policies to their workflows. 
+ID DataWeb’s Attribute Exchange Network can serve as the central identity verification, decisioning and workflow hub for an organization's account opening, password reset, or ongoing re-verification requirements. The AXN is a multi-tenant SaaS platform that currently integrates with 70+ of the industry’s top verification services, across human identity, affiliations, and environmental risk – presenting a single management console, cross-vendor Trust Score, and Policy Engine. In addition - the AXN integrates out of the box with ForgeRock through industry standard OpenID Connect - allowing ForgeRock customers to easily add tailored identity verification policies to their workflows. 
 
 These solutions are now integrated into ForgeRock Identity Platform using the **Authentication Tree** from ForgeRock **Access Management**.
 
@@ -19,14 +19,14 @@ These solutions are now integrated into ForgeRock Identity Platform using the **
 
 ### Process steps: 
 1. User accesses application, and clicks “create account”
-2. Application calls Forgerock (OpenID Connect or other method)
-3. Based on the **Authentication Tree** policy, Forgerock makes an OpenID Connect request to the AXN with the client id for the desired verification policy 
+2. Application calls ForgeRock (OpenID Connect or other method)
+3. Based on the **Authentication Tree** policy, ForgeRock makes an OpenID Connect request to the AXN with the client id for the desired verification policy 
 4. Browser redirect to IDW hosted and customer branded verification form, challenging the user for all required attributes for identity verification (customizable by use case.) 
 5. When the user clicks submit, the data is sent against one or many attribute verification services (per the verification policy.)
 6. The results from each vendor are aggregated, and the overall IDW Trust Score is generated. Based on Customer’s policy, a PASS, FAIL or STEP UP decision is created.
-7. AXN sends the OpenID Connect response to Forgerock, including test results, IDW Trust score, and policy decision
-8. Forgerock makes a decision based on the policy decision returned from AXN, and routes the user to the next step in the business process (If Policy Decision == "APPROVE" -> provision account)
-9. Once the provisioning or access management process is complete, Forgerock responds to the application. 
+7. AXN sends the OpenID Connect response to ForgeRock, including test results, IDW Trust score, and policy decision
+8. ForgeRock makes a decision based on the policy decision returned from AXN, and routes the user to the next step in the business process (If Policy Decision == "APPROVE" -> provision account)
+9. Once the provisioning or access management process is complete, ForgeRock responds to the application. 
 
 
 ## Pre-requisites
@@ -51,16 +51,16 @@ Access Management must have network connectivity to ID DataWeb's cloud solution.
 You can create many types of authentication tree to match your specific deployment. Below are 2 variants than can typically be used for simple setups. The integration of the ID DataWeb authentication solutions is done via the OAuth 2.0 node.
 
 #### Quick Demo Setup
-For a **quick demo setup**, build this flow. It uses the **"Provision Dynamic Account"** node, that creates temporary accounts for logged in users. Those accounts are deleted once the session expires.
+For a **quick demo setup**, build this flow. It uses the **"Provision Dynamic Account"** node, that creates accounts directly to Access Management's Data Store. 
 
 
-![Tree with temporary accounts](/images/tree-temporary.png)
+![Tree with temporary accounts](/images/provision_dynamic.png)
 
 #### Persistent Accounts
-For a more realistic deployment, we recommend to use this flow. It uses the **"Provision IDM Account"** node to **permanently persist user accounts** in an IDM. An IDM needs to be configured in Access Management.
+For a more realistic deployment, we recommend to use this flow. It uses the **"Provision IDM Account"** node to **permanently persist user accounts** in an Identity Management (IDM). An IDM instance needs to be configured in Access Management.
 
 
-![Tree with permanent accounts](/images/tree-permanent.png)
+![Tree with permanent accounts](/images/priovision_idm.png)
 
 
 ### Configure OAuth 2.0 node
