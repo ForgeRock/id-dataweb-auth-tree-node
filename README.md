@@ -5,11 +5,22 @@ Document version: 1.0 (March 2019)
 
 ## Solution Overview
 
-You can now add flexible identity verification policies to your Forgerock workflow using ID DataWeb's Attribute Exchange Network (AXN.) This solution helps you answer "How do I verify that my user's are really who they claim to be" across B2C, B2B and B2E use cases. Forgerock offloads the process of identity verification to ID DataWeb, where customers can configure exactly what attributes need to be collected, what data sources should be used for verification, and how the results should be interpreted into Trust Scores and Policy Decisions across the industry's top identity verification providers. These verification techniques can be be tailored to meet regulatory requirements like KYC/AML, NIST 800-63-3, or EPCS (Electronic Prescriptions for Controlled Substances,) as well as enterprise use cases (Supply chain verification, enterprise password reset, privileged account provisioning.)
+You can now add flexible **real time identity verification and fraud prevention** policies to your Forgerock workflow using ID DataWeb's Attribute Exchange Network (AXN.) This solution helps your organization answer a tough question: "How do I verify that my users are really who they claim to be" across B2C, B2B and B2E use cases. Forgerock offloads the process of identity verification to ID DataWeb, where organizations can configure exactly what attributes need to be collected, what data sources should be used for verification, and how the results should be interpreted into Trust Scores and Policy Decisions across the industry's top identity verification providers. These verification techniques can be be tailored to meet regulatory requirements like KYC/AML, NIST 800-63-3, or EPCS (Electronic Prescriptions for Controlled Substances,) as well as enterprise use cases (Supply chain verification, enterprise password reset, privileged account provisioning.)
 
 ## ID DataWeb Overview
 
 ID DataWeb’s Attribute Exchange Network can serve as the central identity verification, decisioning and workflow hub for an organization's account opening, password reset, or ongoing re-verification requirements. The AXN is a multi-tenant SaaS platform that currently integrates with 70+ of the industry’s top verification services, across human identity, affiliations, and environmental risk – presenting a single management console, cross-vendor Trust Score, and Policy Engine. In addition - the AXN integrates out of the box with ForgeRock through industry standard OpenID Connect - allowing Forgerock customers to easily add tailored identity verification policies to their workflows. 
+
+There are several key steps to an identity proofing process:
+
+* **Identity Resolution** – Collect the required identity attributes from the end user. 
+* **Identity Validation** – Validating that the data provided ties to a legal identity. Note – this step does NOT prove that the user on the other side of the computer is who they say they are.
+* **Identity Verification** – Verifies that the user is who they are claiming to be. 
+* **Fraud detection & prevention** – Process of assessing risk of the user during the identity proofing process. 
+
+Based on this framework, ID DataWeb offers several ways to acheive Identity Verification:
+
+![levels of proofing](/images/levels.png)
 
 These solutions are now integrated into ForgeRock Identity Platform using the **Authentication Tree** from ForgeRock **Access Management**.
 
@@ -21,31 +32,30 @@ This template verifies the end user's identity by sending a one time pin (OTP) t
 
 ![mobilematch graphic](/images/mobileMatch.png)
 
-Validation
+**Validation**
 * Validate accuracy of legal identity across credit bureaus
 
-Verification
+**Verification**
 * Validate personal phone possession (OTP or inline check)
 * Validate the phone number provided by end user is the same as the user asserted identity
 
-Fraud Prevention
+**Fraud Prevention**
 * Check for identity fraud indicators (deceased, synthetic, non-residential) 
 * Analyze environmental risk (device, location, network, user behavior) across full transaction
-
 
 ### Identity Verification Template: BioGovID
 The BioGovID Verification Template verifies the user's identity by validating the authenticity of their government issued ID, then doing a biometric comparison between a selfie and the license image. In addition - this template validates the legal identity through a series of bureau checks, and evaluates the environmental risk of the user's device, location and network. Other fraud or compliance checks (OFAC, AML, Watchlist, Deceased, PO Box, etc) can be added to this policy to meet regulatory requirements.
 
 ![bioGovID graphic](/images/bioGovID.png)
 
-Validation
+**Validation**
 * Validate authenticity of license with fraud / spoof detection
 * Extract PII from license, Validate accuracy of legal identity
 
-Verification
+**Verification**
 * Verify that the face in the selfie matches the face on the license
 
-Fraud Prevention
+**Fraud Prevention**
 * Check for identity fraud indicators (deceased, synthetic, non-residential)
 * Analyze environmental risk (device, location, network, user behavior) across full transaction 
 
@@ -54,15 +64,15 @@ This Verification Template starts with MobileMatch (described above,) and condit
 
 ![adaptiveVerify graphic](/images/mobileMatch-bioGovID.png)
 
-Validation
+**Validation**
 * Validate accuracy of legal identity across credit bureaus
 
-Verification
+**Verification**
 * Validate personal phone possession (OTP or Real Time)
 * Validate the phone number provided by end user is the same as the user asserted identity
 * **If identity cannot be verified:** Step Up to GovID validation with biometric verification
 
-Fraud Prevention
+**Fraud Prevention**
 * Check for identity fraud indicators (deceased, synthetic, non-residential) 
 * Analyze environmental risk (device, location, network, user behavior) across full transaction
 
