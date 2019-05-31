@@ -3,11 +3,20 @@
 # ID DataWeb Attribute Exchange Network Integration
 Document version: 1.0 (March 2019)
 
-## Solution Overview
+# Table of Contents
+1. ID DataWeb / Forgerock Integrated Solution Overview
+2. ID DataWeb Overview
+3. ID DataWeb Verification Templates
+4. ID DataWeb / Forgerock Technical Integration Overview
+5. POC Setup - ID DataWeb and Forgerock Prerequisites 
+6. POC Setup - Forgerock Authentication Tree
+7. POC Setup - Testing Your Configuration
+
+## 1. Solution Overview
 
 You can now add flexible **real time identity verification and fraud prevention** policies to your Forgerock workflow using ID DataWeb's Attribute Exchange Network (AXN.) This solution helps your organization answer a tough question: "How do I verify that my users are really who they claim to be" across B2C, B2B and B2E use cases. Forgerock offloads the process of identity verification to ID DataWeb, where organizations can configure exactly what attributes need to be collected, what data sources should be used for verification, and how the results should be interpreted into Trust Scores and Policy Decisions across the industry's top identity verification providers. These verification techniques can be be tailored to meet regulatory requirements like KYC/AML, NIST 800-63-3, or EPCS (Electronic Prescriptions for Controlled Substances,) as well as enterprise use cases (Supply chain verification, enterprise password reset, privileged account provisioning.)
 
-## ID DataWeb Overview
+## 2. ID DataWeb Overview
 
 ID DataWeb’s Attribute Exchange Network can serve as the central identity verification, decisioning and workflow hub for an organization's account opening, password reset, or ongoing re-verification requirements. The AXN is a multi-tenant SaaS platform that currently integrates with 70+ of the industry’s top verification services, across human identity, affiliations, and environmental risk – presenting a single management console, cross-vendor Trust Score, and Policy Engine. In addition - the AXN integrates out of the box with ForgeRock through industry standard OpenID Connect - allowing Forgerock customers to easily add tailored identity verification policies to their workflows. 
 
@@ -24,7 +33,7 @@ Based on this framework, ID DataWeb offers several ways to acheive Identity Veri
 
 These solutions are now integrated into ForgeRock Identity Platform using the **Authentication Tree** from ForgeRock **Access Management**.
 
-## ID DataWeb Verification Templates
+## 3. ID DataWeb Verification Templates
 Verification Templates represent the best practices for identity verification, fraud prevention and adaptive authentication across the Attribute Exchange Network. Each template is in production with multiple ID DataWeb customers today, and has been preconfigured to address the most common problems enterprises face while establishing digital trust.
 
 ### Identity Verification Template: MobileMatch
@@ -77,7 +86,7 @@ This Verification Template starts with MobileMatch (described above,) and condit
 * Analyze environmental risk (device, location, network, user behavior) across full transaction
 
 
-## ForgeRock & ID DataWeb Integration Overview
+## 4. ForgeRock & ID DataWeb Technical Integration Overview
 
 ![ForgeRock ID DataWeb integration](/images/diagramA.png)
 
@@ -93,7 +102,7 @@ This Verification Template starts with MobileMatch (described above,) and condit
 9. Once the provisioning or access management process is complete, Forgerock responds to the application. 
 
 
-## Pre-requisites
+## 5. POC Setup - Prerequisites
 
 ### ID DataWeb AXN solution
 For this integration, you must have an active Organization in AXN, with an active Verification Policy. To get started, please email sales@iddataweb.com.
@@ -109,7 +118,7 @@ This guide is targeting Access Management (AM) version 6.0+. It can be deployed 
 
 Access Management must have network connectivity to ID DataWeb's cloud solution.
 
-## Create a new Authentication Tree
+## 6. POC Setup - Forgerock Authentication Tree
 
 ### Authentication Tree Diagram
 You can create many types of authentication tree to match your specific deployment. Below are 2 variants than can typically be used for simple setups. The integration of the ID DataWeb authentication solutions is done via the OAuth 2.0 node.
@@ -156,7 +165,7 @@ In the authentication tree, select the OAuth 2.0 node. A form tab will open on t
 * **OAuth 2.0 Mix-Up Mitigation Enabled** - ```disabled```
 * **Token Issuer** - Copy value from the entry **issuer** in the **OpenID Discovery URL** web page (see the pre-requisites)
 
-## Testing your configuration
+## 7. Testing your configuration
 Access Management provides a quick way to test your setup at this stage.
 1. Trigger the chain using a browser by using its service name
 Example: https://openam.mybank.com/openam/XUI/#login&service=idwVerify
