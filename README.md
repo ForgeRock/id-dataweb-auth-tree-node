@@ -1,6 +1,7 @@
 ![ID DataWeb Logo](/images/idwLogo.png)
 
-# ID DataWeb Attribute Exchange Network Integration
+# ID DataWeb Integration
+### Identity Verification, Fraud Detection and Adaptive Authentication 
 Document version: 1.0 (March 2019)
 
 # Table of Contents
