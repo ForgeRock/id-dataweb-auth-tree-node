@@ -23,9 +23,11 @@ This template verifies the end user's identity by sending a one time pin (OTP) t
 
 Validation
 * Validate accuracy of legal identity across credit bureaus
+
 Verification
 * Validate personal phone possession (OTP or inline check)
 * Validate the phone number provided by end user is the same as the user asserted identity
+
 Fraud Prevention
 * Check for identity fraud indicators (deceased, synthetic, non-residential) 
 * Analyze environmental risk (device, location, network, user behavior) across full transaction
@@ -34,13 +36,15 @@ Fraud Prevention
 ### Identity Verification Template: BioGovID
 The BioGovID Verification Template verifies the user's identity by validating the authenticity of their government issued ID, then doing a biometric comparison between a selfie and the license image. In addition - this template validates the legal identity through a series of bureau checks, and evaluates the environmental risk of the user's device, location and network. Other fraud or compliance checks (OFAC, AML, Watchlist, Deceased, PO Box, etc) can be added to this policy to meet regulatory requirements.
 
-![bioGovID graphic](/images/BioGovID.png)
+![bioGovID graphic](/images/bioGovID.png)
 
 Validation
 * Validate authenticity of license with fraud / spoof detection
 * Extract PII from license, Validate accuracy of legal identity
+
 Verification
 * Verify that the face in the selfie matches the face on the license
+
 Fraud Prevention
 * Check for identity fraud indicators (deceased, synthetic, non-residential)
 * Analyze environmental risk (device, location, network, user behavior) across full transaction 
@@ -48,14 +52,16 @@ Fraud Prevention
 ### Identity Verification Template: MobileMatch with Adaptive BioGovID Step Up
 This Verification Template starts with MobileMatch (described above,) and conditionally falls back to BioGovID if the user cannot be verified. This demonstrates ID DataWeb's adaptive verification capabilities, where an enterprise can specify "fallback" capabilities based on the results of the primary verification technique. 
 
-![adaptiveVerify graphic](/images/mobileMatch-BioGovID.png)
+![adaptiveVerify graphic](/images/mobileMatch-bioGovID.png)
 
 Validation
 * Validate accuracy of legal identity across credit bureaus
+
 Verification
 * Validate personal phone possession (OTP or Real Time)
 * Validate the phone number provided by end user is the same as the user asserted identity
-* * If identity cannot be verified: Step Up to GovID validation with biometric verification
+* **If identity cannot be verified:** Step Up to GovID validation with biometric verification
+
 Fraud Prevention
 * Check for identity fraud indicators (deceased, synthetic, non-residential) 
 * Analyze environmental risk (device, location, network, user behavior) across full transaction
