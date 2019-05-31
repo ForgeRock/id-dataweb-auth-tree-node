@@ -1,4 +1,4 @@
-![ID DataWeb Logo](/images/idwLogo.png)
+![ID DataWeb Logo](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/idwLogo.png?raw=true)
 
 # ID DataWeb Integration
 ### Identity Verification, Fraud Detection and Adaptive Authentication 
@@ -30,7 +30,7 @@ There are several key steps to an identity proofing process:
 
 Based on this framework, ID DataWeb offers several ways to acheive Identity Verification:
 
-![levels of proofing](/images/levels.png)
+![levels of proofing](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/levels.png?raw=true)
 
 These solutions are now integrated into ForgeRock Identity Platform using the **Authentication Tree** from ForgeRock **Access Management**.
 
@@ -40,7 +40,7 @@ Verification Templates represent the best practices for identity verification, f
 ### Identity Verification Template: MobileMatch
 This template verifies the end user's identity by sending a one time pin (OTP) to the user's personal phone, then triggering a mobile carrier reverse lookup to verify that the end user's claimed identity matches what is on record for that device. In addition - this template validates the legal identity through a series of bureau checks, and evaluates the environmental risk of the user's device, location and network. Other fraud or compliance checks (OFAC, AML, Watchlist, Deceased, PO Box, etc) can be added to this policy to meet regulatory requirements. 
 
-![mobilematch graphic](/images/mobileMatch.png)
+![mobilematch graphic](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/mobileMatch.png?raw=true)
 
 **Validation**
 * Validate accuracy of legal identity across credit bureaus
@@ -56,7 +56,7 @@ This template verifies the end user's identity by sending a one time pin (OTP) t
 ### Identity Verification Template: BioGovID
 The BioGovID Verification Template verifies the user's identity by validating the authenticity of their government issued ID, then doing a biometric comparison between a selfie and the license image. In addition - this template validates the legal identity through a series of bureau checks, and evaluates the environmental risk of the user's device, location and network. Other fraud or compliance checks (OFAC, AML, Watchlist, Deceased, PO Box, etc) can be added to this policy to meet regulatory requirements.
 
-![bioGovID graphic](/images/bioGovID.png)
+![bioGovID graphic](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/bioGovID.png?raw=true)
 
 **Validation**
 * Validate authenticity of license with fraud / spoof detection
@@ -72,7 +72,7 @@ The BioGovID Verification Template verifies the user's identity by validating th
 ### Identity Verification Template: MobileMatch with Adaptive BioGovID Step Up
 This Verification Template starts with MobileMatch (described above,) and conditionally falls back to BioGovID if the user cannot be verified. This demonstrates ID DataWeb's adaptive verification capabilities, where an enterprise can specify "fallback" capabilities based on the results of the primary verification technique. 
 
-![adaptiveVerify graphic](/images/mobileMatch-bioGovID.png)
+![adaptiveVerify graphic](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/mobileMatch-bioGovID.png?raw=true)
 
 **Validation**
 * Validate accuracy of legal identity across credit bureaus
@@ -89,7 +89,7 @@ This Verification Template starts with MobileMatch (described above,) and condit
 
 ## 4. ForgeRock & ID DataWeb Technical Integration Overview
 
-![ForgeRock ID DataWeb integration](/images/diagramA.png)
+![ForgeRock ID DataWeb integration](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/diagramA.png?raw=true)
 
 ### End User Flow - Technical Process Steps: 
 1. User accesses application, and clicks “create account”
@@ -128,13 +128,13 @@ You can create many types of authentication tree to match your specific deployme
 For a **quick demo setup**, build this flow. It uses the **"Provision Dynamic Account"** node, that creates an account at the Identity Store that is connected to AM. Those accounts are deleted once the session expires.
 
 
-![Tree with temporary accounts](/images/provision_dynamic.png)
+![Tree with temporary accounts](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/provision_dynamic.png?raw=true)
 
 #### Persistent Accounts
 For a more realistic deployment, we recommend to use this flow. It uses the **"Provision IDM Account"** node to **permanently persist user accounts** in an IDM instance. IDM needs to be configured in Access Management.
 
 
-![Tree with permanent accounts](/images/provision_idm.png)
+![Tree with permanent accounts](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/provision_idm.png?raw=true)
 
 
 ### Configure OAuth 2.0 node
@@ -174,13 +174,13 @@ Example: https://openam.mybank.com/openam/XUI/#login&service=idwVerify
 2. This should automatically redirect you to the ID DataWeb Verification page via an OpenID Connect redirection
 
 
-![Demo login page](/images/diagramB.png)
+![Demo login page](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/diagramB.png?raw=true)
 
 
 3. The user will be prompted to complete identity verification per the configured ID DataWeb Verification Policy. Once complete, the user will be redirected to the Access Management user portal.
 
 
-![ForgeRock User Portal](/images/user_profile.png)
+![ForgeRock User Portal](https://github.com/ForgeRock/id-dataweb-auth-tree-node/blob/master/images/user_profile.png?raw=true)
 
 
 4. Logout of the User Portal using the top right menu.
