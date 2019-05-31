@@ -125,16 +125,16 @@ Access Management must have network connectivity to ID DataWeb's cloud solution.
 You can create many types of authentication tree to match your specific deployment. Below are 2 variants than can typically be used for simple setups. The integration of the ID DataWeb authentication solutions is done via the OAuth 2.0 node.
 
 #### Quick Demo Setup
-For a **quick demo setup**, build this flow. It uses the **"Provision Dynamic Account"** node, that creates temporary accounts for logged in users. Those accounts are deleted once the session expires.
+For a **quick demo setup**, build this flow. It uses the **"Provision Dynamic Account"** node, that creates an account at the Identity Store that is connected to AM. Those accounts are deleted once the session expires.
 
 
-![Tree with temporary accounts](/images/tree-temporary.png)
+![Tree with temporary accounts](/images/provision_dynamic.png)
 
 #### Persistent Accounts
-For a more realistic deployment, we recommend to use this flow. It uses the **"Provision IDM Account"** node to **permanently persist user accounts** in an IDM. An IDM needs to be configured in Access Management.
+For a more realistic deployment, we recommend to use this flow. It uses the **"Provision IDM Account"** node to **permanently persist user accounts** in an IDM instance. IDM needs to be configured in Access Management.
 
 
-![Tree with permanent accounts](/images/tree-permanent.png)
+![Tree with permanent accounts](/images/provision_idm.png)
 
 
 ### Configure OAuth 2.0 node
@@ -180,7 +180,7 @@ Example: https://openam.mybank.com/openam/XUI/#login&service=idwVerify
 3. The user will be prompted to complete identity verification per the configured ID DataWeb Verification Policy. Once complete, the user will be redirected to the Access Management user portal.
 
 
-![ForgeRock User Portal](/images/demo-userpage.png)
+![ForgeRock User Portal](/images/user_profile.png)
 
 
 4. Logout of the User Portal using the top right menu.
