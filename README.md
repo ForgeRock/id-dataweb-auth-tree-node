@@ -5,28 +5,76 @@ Document version: 1.0 (March 2019)
 
 ## Solution Overview
 
-You can now add flexible identity verification policies to your ForgeRock workflow using ID DataWeb's Attribute Exchange Network (AXN.) This solution helps you answer "How do I verify that my user's are really who they claim to be" across B2C, B2B and B2E use cases. ForgeRock offloads the process of identity verification to ID DataWeb, where customers can configure exactly what attributes need to be collected, what data sources should be used for verification, and how the results should be interpreted into Trust Scores and Policy Decisions across the industry's top identity verification providers. These verification techniques can be be tailored to meet regulatory requirements like KYC/AML, NIST 800-63-3, or EPCS (Electronic Prescriptions for Controlled Substances,) as well as enterprise use cases (Supply chain verification, enterprise password reset, privileged account provisioning.)
+You can now add flexible identity verification policies to your Forgerock workflow using ID DataWeb's Attribute Exchange Network (AXN.) This solution helps you answer "How do I verify that my user's are really who they claim to be" across B2C, B2B and B2E use cases. Forgerock offloads the process of identity verification to ID DataWeb, where customers can configure exactly what attributes need to be collected, what data sources should be used for verification, and how the results should be interpreted into Trust Scores and Policy Decisions across the industry's top identity verification providers. These verification techniques can be be tailored to meet regulatory requirements like KYC/AML, NIST 800-63-3, or EPCS (Electronic Prescriptions for Controlled Substances,) as well as enterprise use cases (Supply chain verification, enterprise password reset, privileged account provisioning.)
 
 ## ID DataWeb Overview
 
-ID DataWeb’s Attribute Exchange Network can serve as the central identity verification, decisioning and workflow hub for an organization's account opening, password reset, or ongoing re-verification requirements. The AXN is a multi-tenant SaaS platform that currently integrates with 70+ of the industry’s top verification services, across human identity, affiliations, and environmental risk – presenting a single management console, cross-vendor Trust Score, and Policy Engine. In addition - the AXN integrates out of the box with ForgeRock through industry standard OpenID Connect - allowing ForgeRock customers to easily add tailored identity verification policies to their workflows. 
+ID DataWeb’s Attribute Exchange Network can serve as the central identity verification, decisioning and workflow hub for an organization's account opening, password reset, or ongoing re-verification requirements. The AXN is a multi-tenant SaaS platform that currently integrates with 70+ of the industry’s top verification services, across human identity, affiliations, and environmental risk – presenting a single management console, cross-vendor Trust Score, and Policy Engine. In addition - the AXN integrates out of the box with ForgeRock through industry standard OpenID Connect - allowing Forgerock customers to easily add tailored identity verification policies to their workflows. 
 
 These solutions are now integrated into ForgeRock Identity Platform using the **Authentication Tree** from ForgeRock **Access Management**.
+
+## ID DataWeb Verification Templates
+Verification Templates represent the best practices for identity verification, fraud prevention and adaptive authentication across the Attribute Exchange Network. Each template is in production with multiple ID DataWeb customers today, and has been preconfigured to address the most common problems enterprises face while establishing digital trust.
+
+### Identity Verification Template: MobileMatch
+This template verifies the end user's identity by sending a one time pin (OTP) to the user's personal phone, then triggering a mobile carrier reverse lookup to verify that the end user's claimed identity matches what is on record for that device. In addition - this template validates the legal identity through a series of bureau checks, and evaluates the environmental risk of the user's device, location and network. Other fraud or compliance checks (OFAC, AML, Watchlist, Deceased, PO Box, etc) can be added to this policy to meet regulatory requirements. 
+
+![mobilematch graphic](/images/mobileMatch.png)
+
+Validation
+* Validate accuracy of legal identity across credit bureaus
+Verification
+* Validate personal phone possession (OTP or inline check)
+* Validate the phone number provided by end user is the same as the user asserted identity
+Fraud Prevention
+* Check for identity fraud indicators (deceased, synthetic, non-residential) 
+* Analyze environmental risk (device, location, network, user behavior) across full transaction
+
+
+### Identity Verification Template: BioGovID
+The BioGovID Verification Template verifies the user's identity by validating the authenticity of their government issued ID, then doing a biometric comparison between a selfie and the license image. In addition - this template validates the legal identity through a series of bureau checks, and evaluates the environmental risk of the user's device, location and network. Other fraud or compliance checks (OFAC, AML, Watchlist, Deceased, PO Box, etc) can be added to this policy to meet regulatory requirements.
+
+![bioGovID graphic](/images/bioGovID.png)
+
+Validation
+* Validate authenticity of license with fraud / spoof detection
+* Extract PII from license, Validate accuracy of legal identity
+Verification
+* Verify that the face in the selfie matches the face on the license
+Fraud Prevention
+* Check for identity fraud indicators (deceased, synthetic, non-residential)
+* Analyze environmental risk (device, location, network, user behavior) across full transaction 
+
+### Identity Verification Template: MobileMatch with Adaptive BioGovID Step Up
+This Verification Template starts with MobileMatch (described above,) and conditionally falls back to BioGovID if the user cannot be verified. This demonstrates ID DataWeb's adaptive verification capabilities, where an enterprise can specify "fallback" capabilities based on the results of the primary verification technique. 
+
+![adaptiveVerify graphic](/images/mobileMatch-BioGovID.png)
+
+Validation
+* Validate accuracy of legal identity across credit bureaus
+Verification
+* Validate personal phone possession (OTP or Real Time)
+* Validate the phone number provided by end user is the same as the user asserted identity
+* * If identity cannot be verified: Step Up to GovID validation with biometric verification
+Fraud Prevention
+* Check for identity fraud indicators (deceased, synthetic, non-residential) 
+* Analyze environmental risk (device, location, network, user behavior) across full transaction
+
 
 ## ForgeRock & ID DataWeb Integration Overview
 
 ![ForgeRock ID DataWeb integration](/images/diagramA.png)
 
-### Process steps: 
+### End User Flow - Technical Process Steps: 
 1. User accesses application, and clicks “create account”
-2. Application calls ForgeRock (OpenID Connect or other method)
-3. Based on the **Authentication Tree** policy, ForgeRock makes an OpenID Connect request to the AXN with the client id for the desired verification policy 
+2. Application calls Forgerock (OpenID Connect or other method)
+3. Based on the **Authentication Tree** policy, Forgerock makes an OpenID Connect request to the AXN with the client id for the desired verification policy 
 4. Browser redirect to IDW hosted and customer branded verification form, challenging the user for all required attributes for identity verification (customizable by use case.) 
 5. When the user clicks submit, the data is sent against one or many attribute verification services (per the verification policy.)
 6. The results from each vendor are aggregated, and the overall IDW Trust Score is generated. Based on Customer’s policy, a PASS, FAIL or STEP UP decision is created.
-7. AXN sends the OpenID Connect response to ForgeRock, including test results, IDW Trust score, and policy decision
-8. ForgeRock makes a decision based on the policy decision returned from AXN, and routes the user to the next step in the business process (If Policy Decision == "APPROVE" -> provision account)
-9. Once the provisioning or access management process is complete, ForgeRock responds to the application. 
+7. AXN sends the OpenID Connect response to Forgerock, including test results, IDW Trust score, and policy decision
+8. Forgerock makes a decision based on the policy decision returned from AXN, and routes the user to the next step in the business process (If Policy Decision == "APPROVE" -> provision account)
+9. Once the provisioning or access management process is complete, Forgerock responds to the application. 
 
 
 ## Pre-requisites
@@ -51,16 +99,16 @@ Access Management must have network connectivity to ID DataWeb's cloud solution.
 You can create many types of authentication tree to match your specific deployment. Below are 2 variants than can typically be used for simple setups. The integration of the ID DataWeb authentication solutions is done via the OAuth 2.0 node.
 
 #### Quick Demo Setup
-For a **quick demo setup**, build this flow. It uses the **"Provision Dynamic Account"** node, that creates accounts directly to Access Management's Data Store. 
+For a **quick demo setup**, build this flow. It uses the **"Provision Dynamic Account"** node, that creates temporary accounts for logged in users. Those accounts are deleted once the session expires.
 
 
-![Tree with temporary accounts](/images/provision_dynamic.png)
+![Tree with temporary accounts](/images/tree-temporary.png)
 
 #### Persistent Accounts
-For a more realistic deployment, we recommend to use this flow. It uses the **"Provision IDM Account"** node to **permanently persist user accounts** in an Identity Management (IDM). An IDM instance needs to be configured in Access Management.
+For a more realistic deployment, we recommend to use this flow. It uses the **"Provision IDM Account"** node to **permanently persist user accounts** in an IDM. An IDM needs to be configured in Access Management.
 
 
-![Tree with permanent accounts](/images/provision_idm.png)
+![Tree with permanent accounts](/images/tree-permanent.png)
 
 
 ### Configure OAuth 2.0 node
