@@ -1,4 +1,4 @@
-![ID DataWeb Logo](/images/xyz.gif)
+![ID DataWeb Logo](/images/idwLogo.png)
 
 # ID DataWeb Attribute Exchange Network Integration
 Document version: 1.0 (March 2019)
@@ -34,7 +34,7 @@ Fraud Prevention
 ### Identity Verification Template: BioGovID
 The BioGovID Verification Template verifies the user's identity by validating the authenticity of their government issued ID, then doing a biometric comparison between a selfie and the license image. In addition - this template validates the legal identity through a series of bureau checks, and evaluates the environmental risk of the user's device, location and network. Other fraud or compliance checks (OFAC, AML, Watchlist, Deceased, PO Box, etc) can be added to this policy to meet regulatory requirements.
 
-![bioGovID graphic](/images/bioGovID.png)
+![bioGovID graphic](/images/BioGovID.png)
 
 Validation
 * Validate authenticity of license with fraud / spoof detection
